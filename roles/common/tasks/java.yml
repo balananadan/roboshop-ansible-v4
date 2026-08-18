@@ -1,0 +1,23 @@
+- name: Load App Pre-reqs
+  ansible.builtin.include_tasks: pre-reqs.yml
+
+- name: Install Java & Maven
+  ansible.builtin.dnf:
+    name:
+      - java-21-openjdk
+      - java-21-openjdk-devel
+      - maven
+    state: present
+
+- name: Build Application Code
+  ansible.builtin.shell: mvn clean package -DskipTests
+  args:
+    chdir: /app
+
+- name: Copy Jar file
+  ansible.builtin.shell: cp target/{{ component_name }}.jar /app/{{ component_name }}.jar
+  args:
+    chdir: /app
+
+- name: Load SystemD
+  ansible.builtin.include_tasks: systemd.yml

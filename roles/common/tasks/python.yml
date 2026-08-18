@@ -1,0 +1,17 @@
+- name: Load App Pre-reqs
+  ansible.builtin.include_tasks: pre-reqs.yml
+
+- name: Install Python & Pip
+  ansible.builtin.dnf:
+    name:
+      - python3
+      - python3-pip
+    state: present
+
+- name: Install App Dependencies
+  ansible.builtin.shell: pip3 install -r requirements.txt
+  args:
+    chdir: /app
+
+- name: Load SystemD
+  ansible.builtin.include_tasks: systemd.yml
