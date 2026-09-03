@@ -6,13 +6,13 @@
 - name: Update Valkey config - bind address
   ansible.builtin.replace:
     path: /etc/valkey/valkey.conf
-    regexp: '^bind 127\.0\.0\.1'
+    regexp: 'bind 127.0.0.1'
     replace: 'bind 0.0.0.0'
 
 - name: Update Valkey config - protected mode
   ansible.builtin.replace:
     path: /etc/valkey/valkey.conf
-    regexp: '^protected-mode yes'
+    regexp: 'protected-mode yes'
     replace: 'protected-mode no'
 
 - name: Start Valkey service
@@ -20,3 +20,8 @@
     name: valkey
     state: restarted
     enabled: yes
+
+- name: Import node_exporter from Common Role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: node-exporter
