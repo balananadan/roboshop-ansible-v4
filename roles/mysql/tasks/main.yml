@@ -17,3 +17,8 @@
       ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';
       FLUSH PRIVILEGES;
     "
+
+- name: Import node_exporter from Common Role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: node-exporter
