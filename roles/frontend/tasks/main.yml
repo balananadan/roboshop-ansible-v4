@@ -8,8 +8,6 @@
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
-
-
 - name: Remove App content folder
   ansible.builtin.file:
     path: /usr/share/nginx/html
