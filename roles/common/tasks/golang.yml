@@ -12,6 +12,12 @@
   ansible.builtin.shell: go mod tidy && CGO_ENABLED=0 go build -o /app/{{ component_name }} .
   args:
     chdir: /app
+  environment:
+    HOME: /root
+    GOPATH: /root/go
+    GOMODCACHE: /root/go/pkg/mod
+    GOCACHE: /root/.cache/go-build
+    PATH: "/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/root/go/bin"
 
 - name: Load SystemD
   ansible.builtin.include_tasks: systemd.yml
