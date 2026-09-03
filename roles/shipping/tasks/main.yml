@@ -3,9 +3,4 @@
     name: common
     tasks_from: java
 
-- name: Load mysql-schema
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: mysql-schema
-
 
