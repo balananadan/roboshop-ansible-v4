@@ -20,3 +20,10 @@
     src: https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/{{ component_name }}.zip
     dest: /app
     remote_src: yes
+
+- name: Load mysql-schema
+  when: schema_load | default('false') | bool
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: mysql-schema
+
